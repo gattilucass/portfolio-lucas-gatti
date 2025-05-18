@@ -13,89 +13,113 @@ import ScrollToTop from "@/components/scroll-to-top"
 import FloatingShapes from "@/components/floating-shapes"
 import FloatingContact from "@/components/floating-contact"
 import MoreCampaignsModal from "@/components/more-campaigns-modal"
+import CVViewer from "@/components/cv-viewer"
+
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-white overflow-hidden">
       <Navbar />
+      <CVViewer />
       <ScrollToTop />
       <FloatingContact />
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 overflow-hidden">
-        <FloatingShapes />
-        <div className="absolute inset-0 z-0 opacity-20">
-          <div className="absolute inset-0 bg-pattern"></div>
-        </div>
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-purple-900/30 to-black/70"></div>
-        </div>
-        <div className="container mx-auto px-4 md:px-6 flex flex-col items-center text-center z-10">
-          <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <h1 className="text-5xl md:text-7xl font-bold font-playfair tracking-tight text-white mb-4">Lucas Gatti</h1>
-            <div className="h-1 w-32 mx-auto bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mb-6"></div>
-            <h2 className="text-2xl md:text-3xl text-gray-200 mb-8 font-poppins">
-              Diseñador Digital & Marketing Specialist
-            </h2>
-          </motion.div>
+  <FloatingShapes />
 
-          <motion.p
-            className="text-lg md:text-xl text-gray-100 max-w-2xl mb-10 font-poppins"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            Transformando ideas en{" "}
-            <span className="relative inline-block">
-              <span className="relative z-10 font-semibold">campañas digitales efectivas</span>
-              <span className="absolute bottom-0 left-0 w-full h-3 bg-purple-500/30 -z-10"></span>
-            </span>{" "}
-            y{" "}
-            <span className="relative inline-block">
-              <span className="relative z-10 font-semibold">contenido visual impactante</span>
-              <span className="absolute bottom-0 left-0 w-full h-3 bg-blue-500/30 -z-10"></span>
-            </span>
-            .
-          </motion.p>
+  {/* Background overlays */}
+  <div className="absolute inset-0 z-0 opacity-20">
+    <div className="absolute inset-0 bg-pattern"></div>
+  </div>
+  <div className="absolute inset-0 z-0">
+    <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-purple-900/30 to-black/70"></div>
+  </div>
 
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            <Link
-              href="#portfolio"
-              className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300 flex items-center justify-center gap-2 font-medium w-64"
-            >
-              Ver mi trabajo <ArrowRight size={18} />
-            </Link>
-            <button
-              onClick={() => document.getElementById("cv-viewer-btn")?.click()}
-              className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white border border-white/30 rounded-full hover:bg-white/20 transition-all duration-300 font-medium flex items-center justify-center gap-2 w-64"
-            >
-              Ver mi CV <FileText size={18} />
-            </button>
-          </motion.div>
+  {/* Content */}
+  <div className="container mx-auto px-4 md:px-6 flex flex-col items-center text-center z-10">
+    {/* TITULO */}
+    <motion.div
+      initial={{ opacity: 0, y: -30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+    >
+      <h1 className="text-6xl md:text-8xl font-bold font-playfair tracking-tight text-white mb-4 animate-fade-in-up drop-shadow-md">
+        Lucas Gatti
+      </h1>
+      <div className="h-1 w-40 mx-auto bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mb-6"></div>
+      <h2 className="text-2xl md:text-4xl text-gray-200 mb-8 font-poppins">
+        Diseñador Digital & Marketing Specialist
+      </h2>
+    </motion.div>
 
-          <motion.div
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1 }}
-          >
-            <Link href="#about" className="flex flex-col items-center text-white/80 hover:text-white transition-colors">
-              <span className="text-sm mb-2 font-poppins">Descubre más</span>
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-              >
-                <ArrowDown size={24} />
-              </motion.div>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+    {/* SUBTITULO */}
+    <motion.p
+      className="text-lg md:text-xl text-gray-100 max-w-2xl mb-10 font-poppins leading-relaxed"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, delay: 0.3 }}
+    >
+      Transformando ideas en{" "}
+      <span className="relative inline-block">
+        <span className="relative z-10 font-semibold">campañas digitales efectivas</span>
+        <span className="absolute bottom-0 left-0 w-full h-3 bg-purple-500/30 -z-10"></span>
+      </span>{" "}
+      y{" "}
+      <span className="relative inline-block">
+        <span className="relative z-10 font-semibold">contenido visual impactante</span>
+        <span className="absolute bottom-0 left-0 w-full h-3 bg-blue-500/30 -z-10"></span>
+      </span>
+      .
+    </motion.p>
+
+    {/* BOTONES */}
+    <motion.div
+      className="flex flex-col sm:flex-row gap-4 justify-center"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, delay: 0.6 }}
+    >
+      <Link
+        href="#portfolio"
+        className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300 flex items-center justify-center gap-2 font-medium w-64 group"
+      >
+        Ver mi trabajo
+        <motion.span
+          className="group-hover:translate-x-2 transition-transform"
+          animate={{ x: [0, 4, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+        >
+          →
+        </motion.span>
+      </Link>
+      <button
+        onClick={() => document.getElementById("cv-viewer-btn")?.click()}
+        className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white border border-white/30 rounded-full hover:bg-white/20 transition-all duration-300 font-medium flex items-center justify-center gap-2 w-64"
+      >
+        Ver mi CV <FileText size={18} />
+      </button>
+    </motion.div>
+
+    {/* SCROLL ICON */}
+    <motion.div
+      className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, delay: 1 }}
+    >
+      <Link href="#about" className="flex flex-col items-center text-white/80 hover:text-white transition-colors">
+        <span className="text-sm mb-2 font-poppins">Descubre más</span>
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ArrowDown size={24} />
+        </motion.div>
+      </Link>
+    </motion.div>
+  </div>
+</section>
 
       {/* About Section */}
       <section id="about" className="py-16 bg-white relative">
@@ -126,17 +150,25 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="relative">
-                <div className="absolute -top-4 -left-4 w-full h-full border-2 border-purple-500 rounded-lg"></div>
-                <Image
-                  src="/placeholder.svg?height=400&width=400"
-                  alt="Lucas Gatti"
-                  width={400}
-                  height={400}
-                  className="rounded-lg shadow-lg relative z-10"
-                />
-                <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-full blur-xl"></div>
-              </div>
+    <div className="relative w-[360px] h-[480px] mx-auto group transition-transform duration-500 hover:scale-105">
+
+  {/* Marco animado encima */}
+  <div className="absolute inset-0 z-10 rounded-lg border-6 border-transparent pointer-events-none">
+    <div className="absolute inset-0 rounded-lg border-6 border-transparent animate-border-gradient bg-gradient-to-r from-purple-500 via-blue-500 to-purple-500 bg-[length:300%_300%]"></div>
+  </div>
+
+  {/* Imagen */}
+  <Image
+    width={360}
+    height={480}
+    className="object-cover rounded-lg z-20 relative"
+    priority
+  />
+</div>
+
+
+
+
             </motion.div>
 
             <motion.div
