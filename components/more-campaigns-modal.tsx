@@ -26,9 +26,9 @@ export default function MoreCampaignsModal() {
     {
       title: "Campaña Verano Seguro",
       description: "Campaña estacional con colores vivos y elementos veraniegos para seguros de auto.",
-      type: "image",
-      src: "/placeholder.svg?height=600&width=800",
-      link: "https://www.canva.com/design/DAGhCWH0sVQ/vQ_zWijJKFyjJW7l3u2oBA/edit",
+      type: "video",
+      src: "/images/verano-seguro.jpg",
+      link: "https://www.canva.com/design/DAF6UILhiH8/_SVw_8O5vvDRmTyRf3O_fw/edit?utm_content=DAF6UILhiH8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton",
       stats: {
         views: "38.500+",
         engagement: "7.8%",
@@ -39,20 +39,20 @@ export default function MoreCampaignsModal() {
       title: "Anuncios Carrusel para Instagram",
       description: "Serie de imágenes para campaña tipo carrusel y fotos tipo flash para historias de Instagram.",
       type: "image",
-      src: "/placeholder.svg?height=600&width=800",
+      src: "/images/carrusel-foto.jpg",
       link: "https://www.canva.com/design/DAF3v-WTdXY/tbewIwhGd7jdOTAVW2BJew/edit",
-      stats: {
+      stats: {  
         views: "45.000+",
         engagement: "8.2%",
         conversion: "3.5%",
       },
     },
     {
-      title: "Seguro de Viaje Europa",
-      description: "Video promocional para seguro de viaje en Europa, destacando coberturas y beneficios.",
+      title: "Seguro de Viaje a Brasil",
+      description: "Video promocional para seguro de viaje a Brasil, destacando coberturas y beneficios.",
       type: "video",
-      src: "/placeholder.svg?height=600&width=800",
-      link: "https://drive.google.com/file/d/1b2FsLo8_Fvku4kewT2N7dO2LtzhZodLE/view",
+      src: "/images/viaje-brasil.jpg",
+      link: "https://drive.google.com/file/d/10im8X-3KAnssZhXBS1MlWxsBKa0CDI6Q/view?usp=sharing",
       stats: {
         views: "32.000+",
         engagement: "7.5%",
@@ -63,7 +63,7 @@ export default function MoreCampaignsModal() {
       title: "Promociones para Estética",
       description: "Diseño de promociones especiales para página de estética, enfocado en tratamientos faciales.",
       type: "image",
-      src: "/placeholder.svg?height=600&width=800",
+      src: "/images/promo-estetica.png",
       link: "https://drive.google.com/file/d/1PVYnD0g2tGlIvUgYwdH8abOAs8Ab8kIE/view",
       stats: {
         views: "18.500+",
@@ -75,19 +75,19 @@ export default function MoreCampaignsModal() {
       title: "Cotización de Seguro para Auto",
       description: "Video explicativo sobre el proceso de cotización y contratación de seguro para automóviles.",
       type: "video",
-      src: "/placeholder.svg?height=600&width=800",
+      src: "/images/como-cotizar.jpg",
       link: "https://drive.google.com/file/d/1TXWBeFtlkLfjDgb-QFOiRpa5OvhccTny/view",
       stats: {
         views: "28.700+",
         engagement: "6.8%",
-        conversion: "3.9%",
+        conversion: "4.0%",
       },
     },
     {
       title: "Colaboración con MODO",
       description: "Anuncio colaborativo con MODO sobre descuentos en combustible con diferentes bancos.",
       type: "video",
-      src: "/placeholder.svg?height=600&width=800",
+      src: "/images/promo-nafta.jpg",
       link: "https://drive.google.com/file/d/1nrcS4Ue8iOJcHwJzlo5XT5C9f2zVzMJs/view",
       stats: {
         views: "52.300+",
@@ -95,16 +95,16 @@ export default function MoreCampaignsModal() {
         conversion: "4.8%",
       },
     },
-    {
-      title: "Anuncios para Seguros de Motos",
-      description: "Serie de anuncios específicos para seguros de motos, destacando coberturas y precios competitivos.",
-      type: "image",
-      src: "/placeholder.svg?height=600&width=800",
-      link: "https://drive.google.com/file/d/1SFQ06GEDCU7IVvSGLMdTDT4SEvNfltT4/view",
+{
+      title: "Anuncio para nuevo modelo de Renault",
+      description: "Video para lanzamiento de nuevo modelo de auto, destacando características y beneficios.",
+      type: "video",
+      src: "/images/nuevo-kardian.jpg",
+      link: "https://drive.google.com/file/d/18aTqfZhM5ZH7z_l9x3Ins-UDvHiwQ62T/view?usp=sharing",
       stats: {
-        views: "35.600+",
-        engagement: "7.9%",
-        conversion: "4.5%",
+        views: "15.000+",
+        engagement: "4.2%",
+        conversion: "3.9%",
       },
     },
   ]

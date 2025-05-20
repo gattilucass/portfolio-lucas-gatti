@@ -45,7 +45,7 @@ export default function FloatingContact() {
                   <MessageCircle size={24} />
                 </motion.a>
                 <motion.a
-                  href="https://linkedin.com/in/lucasgatti"
+                  href="https://www.linkedin.com/in/lucas-gatti-a67713206/"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1 }}

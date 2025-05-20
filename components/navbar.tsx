@@ -29,7 +29,10 @@ export default function Navbar() {
     { name: "Campañas", href: "#campaigns" },
     { name: "Freelance", href: "#freelance" },
     { name: "Resultados", href: "#results" },
+    { name: "Testimonios", href: "#testimonios"},
     { name: "Contacto", href: "#contact" },
+    
+
   ]
 
   return (
