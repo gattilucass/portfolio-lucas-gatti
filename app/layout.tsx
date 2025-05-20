@@ -1,4 +1,3 @@
-import type React from "react"
 import type { Metadata } from "next"
 import { Montserrat, Poppins, Playfair_Display } from "next/font/google"
 import "./globals.css"
@@ -10,8 +9,6 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
   display: "swap",
 })
-
-
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -30,7 +27,10 @@ export const metadata: Metadata = {
   title: "Lucas Gatti | Diseñador Digital & Marketing Specialist",
   description:
     "Portfolio profesional de Lucas Gatti, especialista en marketing digital, diseño gráfico y creación de contenido.",
-    generator: 'v0.dev'
+  icons: {
+    icon: "/favicon.ico", // 👈 ESTA es la forma correcta en App Router
+  },
+  generator: "v0.dev",
 }
 
 export default function RootLayout({
@@ -39,9 +39,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className="scroll-smooth">
-      <body className={`${montserrat.variable} ${poppins.variable} ${playfair.variable} font-sans`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
+    <html lang="es" className={`${montserrat.variable} ${poppins.variable} ${playfair.variable}`}>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           {children}
         </ThemeProvider>
       </body>
