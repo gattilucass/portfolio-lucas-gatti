@@ -19,7 +19,8 @@ import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Star } from "lucide-react";
-
+import { useState, useEffect } from "react";
+import ClientModal from "@/components/client-modal";
 
 // Iconos
 import {ThumbsUp, Quote } from "lucide-react"
@@ -27,7 +28,26 @@ import {ThumbsUp, Quote } from "lucide-react"
 
 
 export default function Home() {
+  const [toolsOpen, setToolsOpen] = useState(false)
+
+  const tools = [
+  { name: "Adobe Photoshop", file: "adobephotoshop" },
+  { name: "Adobe Premiere", file: "adobepremierepro" },
+  { name: "Adobe Illustrator", file: "adobeillustrator" },
+  { name: "Canva", file: "canva" },
+  { name: "Figma", file: "figma" },
+  { name: "Notion", file: "notion" },
+  { name: "Excel", file: "microsoftexcel" },
+  { name: "Visual Basic", file: "visualbasic" },
+  { name: "Zoho CRM", file: "zoho" },
+  { name: "Google Ads", file: "googleads" },
+  { name: "Meta Ads", file: "facebook" },
+  { name: "Next.js", file: "nextdotjs" },
+]
+
+
   return (
+
     <main className="min-h-screen bg-white overflow-hidden">
       
       <Navbar />
@@ -133,278 +153,327 @@ export default function Home() {
 </section>
 
 
-      {/* About Section */}
-      <section id="about" className="py-16 bg-white relative">
-        <div className="container mx-auto px-4 md:px-6">
-          <SectionTitle subtitle="Conoce mi experiencia y especialidades en el mundo digital">Sobre Mí</SectionTitle>
+       {/* About & Skills Combined Section */}
+<section id="about" className="py-16 bg-white relative">
+  <div className="container mx-auto px-4 md:px-6">
+    <SectionTitle subtitle="Conoce mi experiencia y especialidades en el mundo digital">
+      Sobre Mí
+    </SectionTitle>
 
-          {/* Texto principal centrado */}
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <p className="text-lg text-gray-800 mb-6 font-poppins">
-              Profesional con formación técnica y más de cinco años de experiencia en el sector asegurador y marketing digital.{" "}
-              <span className="font-semibold text-purple-700">Especializado en generación de leads, creación de contenido audiovisual y campañas Meta y Google Ads.</span> 
-            </p>
-            <p className="text-lg text-gray-800 mb-8 font-poppins">
-              Domino herramientas como{" "}
-              <span className="font-semibold text-blue-700">Canva, Photoshop, Premiere, Zoho CRM</span> y plataformas
-              publicitarias. He colaborado con diversas compañías de seguros y representantes de Meta Ads y Google Ads,
-              adaptándome a diferentes estilos y audiencias según cada necesidad de campaña.
-            </p>
+    {/* Texto principal centrado animado */}
+    <motion.div
+      className="max-w-3xl mx-auto text-center mb-12"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
+      <p className="text-lg text-gray-800 mb-6 font-poppins drop-shadow-sm leading-relaxed">
+        Profesional TI y <span className="font-semibold text-purple-700">Marketing Specialist</span> con más de 5
+        años en sector asegurador y desarrollo de campañas digitales. Creo estrategias de alto impacto,
+        contenido audiovisual y optimizo presupuestos en <span className="font-semibold text-blue-600">Meta y Google Ads</span>.
+      </p>
+      <p className="text-lg text-gray-800 mb-8 font-poppins drop-shadow-sm leading-relaxed">
+        Además diseño y desarrollo <span className="font-semibold text-blue-700">landing pages</span> y 
+        <span className="font-semibold text-blue-700"> sitios web</span>, como este portafolio. Domino herramientas y plataformas clave para tu proyecto.
+      </p>
+    </motion.div>
+
+    <div className="flex flex-col lg:flex-row gap-12 items-start">
+
+      {/* Imagen con efecto animado y posición más baja */}
+      <motion.div
+        className="md:w-1/3 pt-8" // 👈 este padding mueve la imagen más abajo
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="relative w-[360px] h-[480px] mx-auto group transition-transform duration-500 hover:scale-105">
+          {/* Marco animado encima */}
+          <div className="absolute inset-0 z-10 rounded-lg border-6 border-transparent pointer-events-none">
+            <div className="absolute inset-0 rounded-lg border-6 border-transparent animate-border-gradient bg-gradient-to-r from-purple-500 via-blue-500 to-purple-500 bg-[length:300%_300%]"></div>
           </div>
+          {/* Imagen */}
+          <Image
+            src="/images/lucas-gatti-sinfondo.png"
+            alt="Lucas Gatti"
+            width={360}
+            height={480}
+            className="object-cover rounded-lg z-20 relative"
+            priority
+          />
+        </div>
+      </motion.div>
 
-          <div className="flex flex-col md:flex-row gap-12 items-center">
-            <motion.div
-              className="md:w-1/3"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-    <div className="relative w-[360px] h-[480px] mx-auto group transition-transform duration-500 hover:scale-105">
+      {/* Cards: Experiencia, Especialidad, Herramientas, Resultados */}
+      <motion.div
+        className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-6"
+        initial={{ opacity: 0, x: 50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        {/* Experiencia */}
+        <AnimatedCard className="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-purple-500 hover:shadow-md transition">
+          <h3 className="text-xl font-playfair font-semibold text-gray-900 mb-4 flex items-center">
+            🕒 Experiencia
+          </h3>
+          <ul className="text-gray-700 font-poppins list-disc list-inside space-y-2">
+            <li>+5 años en marketing digital & gestión de campañas multi-plataforma.</li>
+            <li>Implementación de embudos y automatizaciones en Zoho CRM.</li>
+            <li>Coordinación de equipos creativos y producción audiovisual.</li>
+            <li>Desarrollo de landing pages y sitios web (Next.js, Tailwind).</li>
+          </ul>
+        </AnimatedCard>
 
-  {/* Marco animado encima */}
-  <div className="absolute inset-0 z-10 rounded-lg border-6 border-transparent pointer-events-none">
-    <div className="absolute inset-0 rounded-lg border-6 border-transparent animate-border-gradient bg-gradient-to-r from-purple-500 via-blue-500 to-purple-500 bg-[length:300%_300%]"></div>
+        {/* Especialidad */}
+        <AnimatedCard className="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-blue-500 hover:shadow-md transition">
+          <h3 className="text-xl font-playfair font-semibold text-gray-900 mb-4 flex items-center">
+            🎯 Especialidad
+          </h3>
+          <p className="text-gray-700 font-poppins mb-4">
+            <strong>Contenido visual impactante</strong>, campañas de alto CPL y ROI, y conversiones medibles.
+          </p>
+          <p className="text-gray-700 font-poppins mb-4">
+          <li>Diseño de campañas efectivas con estética profesional.</li>
+          <li>Trabajo orientado a resultados y conversión</li>
+          <li>Optimizo cada pieza visual y cada palabra para lograr impacto en audiencias segmentadas.</li>
+          </p>
+          <Link href="#portfolio" className="text-blue-600 font-medium hover:underline font-poppins">
+            Ver proyectos destacados →
+          </Link>
+        </AnimatedCard>
+
+      <AnimatedCard className="group bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-purple-500 hover:shadow-md transition">
+  <h3 className="flex items-center text-xl font-playfair font-semibold text-gray-900 mb-4">
+    🧰 Herramientas
+  </h3>
+
+  {/* Vista previa: las 6 principales */}
+  <div className="grid grid-cols-3 gap-4">
+    {[
+      { name: "Adobe Photoshop", file: "adobephotoshop" },
+      { name: "Adobe Premiere", file: "adobepremierepro" },
+      { name: "Adobe Illustrator", file: "adobeillustrator" },
+      { name: "Canva", file: "canva" },
+      { name: "Figma", file: "figma" },
+      { name: "Notion", file: "notion" },
+    ].map(({ name, file }) => (
+      <figure key={name} className="flex flex-col items-center text-center">
+        <div className="w-1 h-1 flex items-center justify-center"></div>
+          <img
+    src={`/icons/herramientas/${file}.png`}
+    alt={name}
+    className="max-w-12 max-h-10 object-contain"
+  />
+        <figcaption className="mt-2 text-xs font-poppins">{name}</figcaption>
+      </figure>
+    ))}
   </div>
 
-  {/* Imagen */}
-  <Image
-    src="/images/lucas-gatti-sinfondo.png"
-    alt="Lucas Gatti"
-    width={360}
-    height={480}
-    className="object-cover rounded-lg z-20 relative"
-    priority
-  />
-</div>
+  {/* Botón centrado */}
+  <div className="flex justify-center mt-6">
+    <button
+      onClick={() => setToolsOpen(true)}
+      className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition"
+    >
+      Ver todas
+    </button>
+  </div>
+
+  {/* Modal con todas las herramientas */}
+  {toolsOpen && (
+    <ClientModal isOpen={toolsOpen} onRequestClose={() => setToolsOpen(false)}>
+      <h2 className="text-xl font-semibold mb-4 text-center">Todas las herramientas</h2>
+      <div className="grid grid-cols-4 gap-6">
+        {[
+          { name: "Adobe Photoshop", file: "adobephotoshop" },
+          { name: "Adobe Premiere", file: "adobepremierepro" },
+          { name: "Adobe Illustrator", file: "adobeillustrator" },
+          { name: "Canva", file: "canva" },
+          { name: "Figma", file: "figma" },
+          { name: "Notion", file: "notion" },
+          { name: "Excel", file: "microsoftexcel" },
+          { name: "Visual Studio Code", file: "visualstudio" },
+          { name: "Zoho CRM", file: "zoho" },
+          { name: "Google Ads", file: "googleads" },
+          { name: "Meta Ads", file: "facebook" },
+          { name: "Next.js", file: "nextdotjs" },
+        ].map(({ name, file }) => (
+          <div key={name} className="flex flex-col items-center text-center">
+            <img src={`/icons/herramientas/${file}.png`} alt={name} className="w-10 h-10" />
+            <span className="mt-2 text-sm font-poppins text-center">{name}</span>
+          </div>
+        ))}
+      </div>
+      <div className="mt-6 flex justify-center">
+        <button
+          onClick={() => setToolsOpen(false)}
+          className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition"
+        >
+          Cerrar
+        </button>
+      </div>
+    </ClientModal>
+  )}
+</AnimatedCard>
 
 
 
+        {/* Resultados */}
+        <AnimatedCard className="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-blue-500 hover:shadow-md transition">
+          <h3 className="text-xl font-playfair font-semibold text-gray-900 mb-4 flex items-center">
+            📈 Resultados
+          </h3>
+          <ul className="text-gray-700 font-poppins list-disc list-inside space-y-2">
+            <li><strong>200 leads/día</strong> con presupuestos de $3.000 ARS.</li>
+            <li><strong>180K vistas</strong> en video viral de TikTok.</li>
+            <li><strong>4.5% CTR</strong> promedio en campañas Meta Ads.</li>
+            <li><strong>$50 CPL</strong> optimizado reduciendo costos un 30%.</li>
+          </ul>
+          <Link href="#results" className="mt-4 inline-block text-blue-600 font-medium hover:underline font-poppins">
+            Ver todos los resultados →
+          </Link>
+        </AnimatedCard>
+      </motion.div>
+    </div>
+  </div>
 
-            </motion.div>
+<motion.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6, delay: 0.2 }}
+  className="mt-12 flex justify-center"
+>
+  <div className="w-full max-w-2xl p-8 pt-6 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-md hover:shadow-lg transition duration-300 text-center">
+    
+    {/* Título arriba y centrado */}
+    <h3 className="text-2xl font-bold text-gray-900 dark:text-white font-playfair mb-5 relative z-10">
+      🎓 Formación Continua
+      <span className="block w-12 h-1 mt-2 mx-auto bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></span>
+    </h3>
 
-            <motion.div
-              className="md:w-2/3"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    {/* Contenido centrado */}
+    <ul className="space-y-4 text-gray-700 dark:text-gray-200 font-poppins text-[17px] leading-relaxed max-w-lg mx-auto">
+      <li className="flex items-start justify-center gap-2">
+        <span className="text-purple-500">📘</span>
+        <span><strong>Productividad con IA:</strong> ChatGPT y Notion AI – Udemy</span>
+      </li>
+      <li className="flex items-start justify-center gap-2">
+        <span className="text-purple-500">📊</span>
+        <span><strong>Introducción al análisis de datos:</strong> Google / Coursera</span>
+      </li>
+      <li className="flex items-start justify-center gap-2">
+        <span className="text-purple-500">🎨</span>
+        <span><strong>Marketing Digital y Diseño Gráfico:</strong> Edutin Academy</span>
+      </li>
+    </ul>
+  </div>
+</motion.div>
+
+      </section>
+
+
+
+        {/* Skills Section */}
+        <section id="skills" className="py-16 bg-gray-50 relative">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-purple-300/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-300/10 rounded-full blur-3xl"></div>
+
+          <div className="container mx-auto px-4 md:px-6 relative z-10">
+            <SectionTitle subtitle="Conocimientos y capacidades que aporto a cada proyecto">
+              Mis Habilidades
+            </SectionTitle>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Marketing Digital",
+                  icon: "📊",
+                  skills: [
+                    "Campañas Meta y Google Ads",
+                    "Estrategia de contenido",
+                    "Segmentación y A/B tests",
+                    "Optimización de ROI",
+                  ],
+                },
+                {
+                  title: "Diseño Gráfico",
+                  icon: "🎨",
+                  skills: [
+                    "Posts y Stories",
+                    "Banners y Flyers",
+                    "Identidad de marca",
+                    "Animaciones básicas",
+                  ],
+                },
+                {
+                  title: "Creación de Contenido",
+                  icon: "🎬",
+                  skills: [
+                    "Edición TikTok/Instagram",
+                    "Storytelling y guiones",
+                    "Producción audiovisual",
+                    "Voice-overs con IA",
+                  ],
+                },
+                {
+                  title: "Gestión de CRM",
+                  icon: "👥",
+                  skills: [
+                    "Zoho CRM y Woztell",
+                    "Automatizaciones",
+                    "Seguimiento de leads",
+                    "Análisis de datos",
+                  ],
+                },
+                {
+                  title: "Web y Landing Pages",
+                  icon: "💻",
+                  skills: [
+                    "Next.js + Tailwind",
+                    "Deploy Vercel",
+                    "SEO On-Page",
+                    "Formularios y APIs",
+                  ],
+                },
+                {
+                  title: "Soporte al Cliente",
+                  icon: "🤝",
+                  skills: [
+                    "Atención y reclamos",
+                    "Comunicación efectiva",
+                    "Fidelización",
+                    "Reportes y KPIs",
+                  ],
+                },
+              ].map(({ title, icon, skills }, i) => (
                 <AnimatedCard
-                  delay={0.1}
-                  className="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-purple-500 group hover:shadow-md transition-all duration-300"
+                  key={i}
+                  delay={0.1 + i * 0.1}
+                  className="bg-white p-8 rounded-lg shadow-sm border-t-4 border-purple-500 hover:shadow-md transition"
                 >
-                  <div className="relative overflow-hidden rounded-lg">
-                    <div className="absolute inset-0 bg-purple-500/5 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-700 rounded-lg"></div>
-                    <h3 className="font-semibold text-gray-900 mb-3 font-playfair text-xl flex items-center relative z-10">
-                      <span className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3">
-                        <span className="text-purple-700">5+</span>
-                      </span>
-                      Experiencia
-                    </h3>
-                    <p className="text-gray-700 font-poppins relative z-10">
-                      Años en marketing digital, diseño y gestión de campañas publicitarias para múltiples sectores
-                    </p>
+                  <div className="w-14 h-14 mb-6 flex items-center justify-center bg-purple-100 rounded-lg">
+                    <span className="text-2xl">{icon}</span>
                   </div>
-                </AnimatedCard>
-
-                <AnimatedCard
-                  delay={0.2}
-                  className="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-blue-500 group hover:shadow-md transition-all duration-300"
-                >
-                  <div className="relative overflow-hidden">
-                    <div className="absolute inset-0 bg-blue-500/5 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-700 rounded"></div>
-                    <h3 className="font-semibold text-gray-900 mb-3 font-playfair text-xl flex items-center">
-                      <span className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                        <span className="text-blue-700">✓</span>
-                      </span>
-                      Especialidad
-                    </h3>
-                    <p className="text-gray-700 font-poppins">
-                      Contenido visual impactante y campañas publicitarias con alto índice de conversión
-                    </p>
-                  </div>
-                </AnimatedCard>
-
-                <AnimatedCard
-                  delay={0.3}
-                  className="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-purple-500 group hover:shadow-md transition-all duration-300"
-                >
-                  <div className="relative overflow-hidden">
-                    <div className="absolute inset-0 bg-purple-500/5 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-700 rounded"></div>
-                    <h3 className="font-semibold text-gray-900 mb-3 font-playfair text-xl flex items-center">
-                      <span className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3">
-                        <span className="text-purple-700">⚒️</span>
-                      </span>
-                      Herramientas
-                    </h3>
-                    <p className="text-gray-700 font-poppins">
-                      Dominio de Photoshop, Premiere, Illustrator, Canva y plataformas de gestión de campañas
-                    </p>
-                  </div>
-                </AnimatedCard>
-
-                <AnimatedCard
-                  delay={0.4}
-                  className="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-blue-500 group hover:shadow-md transition-all duration-300"
-                >
-                  <div className="relative overflow-hidden">
-                    <div className="absolute inset-0 bg-blue-500/5 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-700 rounded"></div>
-                    <h3 className="font-semibold text-gray-900 mb-3 font-playfair text-xl flex items-center">
-                      <span className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                        <span className="text-blue-700">📈</span>
-                      </span>
-                      Resultados
-                    </h3>
-                    <p className="text-gray-700 font-poppins">
-                      Hasta 200 leads diarios con presupuestos ajustados y ROI optimizado en cada campaña
-                    </p>
-                  </div>
-                </AnimatedCard>
-              </div>
-
-              <div className="mt-10 p-6 bg-gray-50 rounded-lg border border-gray-200 group hover:shadow-md transition-all duration-300">
-                <div className="relative overflow-hidden rounded-lg">
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-blue-500/5 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-700 rounded-lg"></div>
-                  <h3 className="font-semibold text-gray-900 mb-4 font-playfair text-xl relative z-10">
-                    Formación Continua
+                  <h3 className="text-xl font-playfair font-semibold text-gray-900 mb-4">
+                    {title}
                   </h3>
-                  <ul className="space-y-3 text-gray-700 font-poppins relative z-10">
-                    <li className="flex items-start">
-                      <span className="text-purple-500 mr-2">•</span>
-                      <span>Curso: Productividad con Inteligencia Artificial (ChatGPT, Notion AI) – Udemy</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-purple-500 mr-2">•</span>
-                      <span>Curso: Introducción al análisis de datos – Google/Coursera</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-purple-500 mr-2">•</span>
-                      <span>Curso: Marketing Digital y Diseño Gráfico – Edutin Academy</span>
-                    </li>
+                  <ul className="space-y-3 text-gray-700 font-poppins">
+                    {skills.map((s) => (
+                      <li key={s} className="flex items-start">
+                        <span className="mr-2 text-purple-500">•</span>
+                        {s}
+                      </li>
+                    ))}
                   </ul>
-                </div>
-              </div>
-            </motion.div>
+                </AnimatedCard>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-
-      <div className="py-4"></div>
-
-      {/* Skills Section */}
-      <section id="skills" className="py-16 bg-gray-50 relative">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-purple-300/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-300/10 rounded-full blur-3xl"></div>
-
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <SectionTitle subtitle="Conocimientos y capacidades que aporto a cada proyecto">Mis Habilidades</SectionTitle>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Marketing Digital",
-                icon: "📊",
-                color: "purple",
-                skills: [
-                  "Campañas en Meta Ads y Google Ads",
-                  "Estrategia de contenido para redes sociales",
-                  "Análisis de métricas y optimización",
-                  "Gestión de presupuestos publicitarios",
-                ],
-                delay: 0.1,
-              },
-              {
-                title: "Diseño Gráfico",
-                icon: "🎨",
-                color: "blue",
-                skills: [
-                  "Creación de piezas para redes sociales",
-                  "Diseño de banners publicitarios",
-                  "Identidad visual y branding",
-                  "Adaptación de diseños por temporada",
-                ],
-                delay: 0.2,
-              },
-              {
-                title: "Creación de Contenido",
-                icon: "🎬",
-                color: "purple",
-                skills: [
-                  "Edición de video para TikTok e Instagram",
-                  "Producción audiovisual completa",
-                  "Guiones y storytelling",
-                  "Efectos visuales y sonoros",
-                ],
-                delay: 0.3,
-              },
-              {
-                title: "Gestión de CRM",
-                icon: "👥",
-                color: "blue",
-                skills: [
-                  "Zoho CRM y Woztell",
-                  "Seguimiento de leads",
-                  "Automatización de tareas",
-                  "Análisis de datos de clientes",
-                ],
-                delay: 0.4,
-              },
-              {
-                title: "Software",
-                icon: "💻",
-                color: "purple",
-                skills: ["Adobe Photoshop", "Adobe Premiere", "Adobe Illustrator", "Canva Pro"],
-                delay: 0.5,
-              },
-              {
-                title: "Atención al Cliente",
-                icon: "🤝",
-                color: "blue",
-                skills: [
-                  "Gestión de consultas y reclamos",
-                  "Comunicación efectiva",
-                  "Resolución de problemas",
-                  "Fidelización de clientes",
-                ],
-                delay: 0.6,
-              },
-            ].map((skill, index) => (
-              <AnimatedCard
-                key={index}
-                delay={skill.delay}
-                className={`bg-white p-8 rounded-lg shadow-sm border-t-4 ${
-                  skill.color === "purple" ? "border-purple-500" : "border-blue-500"
-                } hover:shadow-md transition-shadow duration-300 group`}
-              >
-                <div
-                  className={`w-14 h-14 rounded-lg flex items-center justify-center mb-6 ${
-                    skill.color === "purple" ? "bg-purple-100" : "bg-blue-100"
-                  } group-hover:scale-110 transition-transform duration-300`}
-                >
-                  <span className="text-2xl">{skill.icon}</span>
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4 font-playfair">{skill.title}</h3>
-                <ul className="space-y-3 text-gray-700 font-poppins">
-                  {skill.skills.map((item, i) => (
-                    <li key={i} className="flex items-start group/item">
-                      <span
-                        className={`mr-2 text-sm transform group-hover/item:translate-x-1 transition-transform ${skill.color === "purple" ? "text-purple-500" : "text-blue-500"}`}
-                      >
-                        ❯
-                      </span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </AnimatedCard>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div className="py-4"></div>
+        </section>
 
       {/* Portfolio Section */}
       <section id="portfolio" className="py-16 bg-white">
@@ -993,136 +1062,208 @@ export default function Home() {
       <div className="py-4"></div>
 
       {/* KPIs and Results Section */}
-      <section
-        id="results"
-        className="py-16 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white relative"
-      >
-        <div className="absolute inset-0 bg-pattern opacity-10"></div>
-        <FloatingShapes />
+<section
+  id="results"
+  className="py-16 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white relative"
+>
+  <div className="absolute inset-0 bg-pattern opacity-10"></div>
+  <FloatingShapes />
 
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <SectionTitle light subtitle="Datos concretos que demuestran la efectividad de mis estrategias">
-            Resultados y Métricas
-          </SectionTitle>
+  <div className="container mx-auto px-4 md:px-6 relative z-10">
+    <SectionTitle light subtitle="Datos concretos que demuestran la efectividad de mis estrategias">
+      Resultados y Métricas
+    </SectionTitle>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
-            <AnimatedCard
-              delay={0.1}
-              className="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20 text-center hover:bg-white/15 transition-colors duration-300"
-            >
-              <div className="text-5xl font-bold text-white mb-4 font-playfair">
-                <AnimatedCounter prefix="+" end={200} />
-              </div>
-              <p className="text-gray-200 font-medium text-lg mb-2 font-poppins">Leads diarios</p>
-              <p className="text-gray-400 text-sm font-poppins">Con presupuesto de $3.000 ARS/día</p>
-            </AnimatedCard>
-
-            <AnimatedCard
-              delay={0.2}
-              className="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20 text-center hover:bg-white/15 transition-colors duration-300"
-            >
-              <div className="text-5xl font-bold text-white mb-4 font-playfair">
-                <AnimatedCounter prefix="+" end={180} suffix="k" />
-              </div>
-              <p className="text-gray-200 font-medium text-lg mb-2 font-poppins">Vistas en video</p>
-              <p className="text-gray-400 text-sm font-poppins">TikTok - Campaña Colapinto</p>
-            </AnimatedCard>
-
-            <AnimatedCard
-              delay={0.3}
-              className="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20 text-center hover:bg-white/15 transition-colors duration-300"
-            >
-              <div className="text-5xl font-bold text-white mb-4 font-playfair">
-                <AnimatedCounter end={4.5} suffix="%" />
-              </div>
-              <p className="text-gray-200 font-medium text-lg mb-2 font-poppins">CTR promedio</p>
-              <p className="text-gray-400 text-sm font-poppins">En campañas de Meta Ads</p>
-            </AnimatedCard>
-
-            <AnimatedCard
-              delay={0.4}
-              className="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20 text-center hover:bg-white/15 transition-colors duration-300"
-            >
-              <div className="text-5xl font-bold text-white mb-4 font-playfair">
-                <AnimatedCounter end={50} prefix="$" />
-              </div>
-              <p className="text-gray-200 font-medium text-lg mb-2 font-poppins">Costo por lead</p>
-              <p className="text-gray-400 text-sm font-poppins">En campañas optimizadas</p>
-            </AnimatedCard>
-          </div>
-
-          <motion.div
-            className="mt-16 bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20 max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            <h3 className="text-2xl font-semibold text-white mb-6 font-playfair">Impacto de las Campañas</h3>
-            <p className="text-gray-200 mb-6 font-poppins">
-              Las campañas diseñadas y ejecutadas lograron un balance óptimo entre presupuesto e impacto, consiguiendo
-              resultados significativamente superiores a la media del sector. La combinación de diseño estacional,
-              mensajes claros y segmentación precisa permitió maximizar el retorno de inversión publicitaria.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-              <div className="bg-white/5 p-6 rounded-lg border border-white/10">
-                <h4 className="font-medium text-white mb-4 font-playfair text-lg flex items-center">
-                  <span className="w-8 h-8 bg-purple-500/30 rounded-full flex items-center justify-center mr-3">
-                    <span className="text-purple-200">✓</span>
-                  </span>
-                  Estrategias Efectivas
-                </h4>
-                <ul className="space-y-2 text-gray-300 text-sm font-poppins">
-                  <li className="flex items-start">
-                    <span className="text-purple-400 mr-2">•</span>
-                    Adaptación visual por temporada
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-purple-400 mr-2">•</span>
-                    Mensajes directos con llamados a la acción claros
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-purple-400 mr-2">•</span>
-                    Segmentación precisa por intereses y comportamiento
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-purple-400 mr-2">•</span>
-                    Optimización continua basada en datos
-                  </li>
-                </ul>
-              </div>
-              <div className="bg-white/5 p-6 rounded-lg border border-white/10">
-                <h4 className="font-medium text-white mb-4 font-playfair text-lg flex items-center">
-                  <span className="w-8 h-8 bg-blue-500/30 rounded-full flex items-center justify-center mr-3">
-                    <span className="text-blue-200">↗</span>
-                  </span>
-                  Mejoras Implementadas
-                </h4>
-                <ul className="space-y-2 text-gray-300 text-sm font-poppins">
-                  <li className="flex items-start">
-                    <span className="text-blue-400 mr-2">•</span>
-                    Rediseño de landing pages para mejorar conversión
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-400 mr-2">•</span>
-                    Pruebas A/B de creatividades y mensajes
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-400 mr-2">•</span>
-                    Ajuste de presupuestos según rendimiento
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-400 mr-2">•</span>
-                    Implementación de remarketing estratégico
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </motion.div>
+    {/* Métricas principales */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+      <AnimatedCard delay={0.1} className="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20 text-center hover:bg-white/15 transition-colors duration-300">
+        <div className="text-5xl font-bold text-white mb-4 font-playfair">
+          <AnimatedCounter prefix="+" end={200} />
         </div>
-      </section>
+        <p className="text-gray-200 font-medium text-lg mb-2 font-poppins">Leads diarios</p>
+        <p className="text-gray-400 text-sm font-poppins">Con presupuesto de $3.000 ARS/día</p>
+      </AnimatedCard>
 
-{/* Testimonios Section */}
+      <AnimatedCard delay={0.2} className="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20 text-center hover:bg-white/15 transition-colors duration-300">
+        <div className="text-5xl font-bold text-white mb-4 font-playfair">
+          <AnimatedCounter prefix="+" end={180} suffix="k" />
+        </div>
+        <p className="text-gray-200 font-medium text-lg mb-2 font-poppins">Vistas en video</p>
+        <p className="text-gray-400 text-sm font-poppins">TikTok - Campaña Colapinto</p>
+      </AnimatedCard>
+
+      <AnimatedCard delay={0.3} className="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20 text-center hover:bg-white/15 transition-colors duration-300">
+        <div className="text-5xl font-bold text-white mb-4 font-playfair">
+          <AnimatedCounter end={4.5} suffix="%" />
+        </div>
+        <p className="text-gray-200 font-medium text-lg mb-2 font-poppins">CTR promedio</p>
+        <p className="text-gray-400 text-sm font-poppins">En campañas de Meta Ads</p>
+      </AnimatedCard>
+
+      <AnimatedCard delay={0.4} className="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20 text-center hover:bg-white/15 transition-colors duration-300">
+        <div className="text-5xl font-bold text-white mb-4 font-playfair">
+          <AnimatedCounter end={50} prefix="$" />
+        </div>
+        <p className="text-gray-200 font-medium text-lg mb-2 font-poppins">Costo por lead</p>
+        <p className="text-gray-400 text-sm font-poppins">En campañas optimizadas</p>
+      </AnimatedCard>
+
+      {/* NUEVAS CARDS */}
+      <AnimatedCard delay={0.5} className="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20 text-center hover:bg-white/15 transition-colors duration-300">
+        <div className="text-5xl font-bold text-white mb-4 font-playfair">
+          <AnimatedCounter end={7} suffix="%" />
+        </div>
+        <p className="text-gray-200 font-medium text-lg mb-2 font-poppins">Tasa de conversión</p>
+        <p className="text-gray-400 text-sm font-poppins">En campañas inbound + remarketing</p>
+      </AnimatedCard>
+
+      <AnimatedCard delay={0.6} className="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20 text-center hover:bg-white/15 transition-colors duration-300">
+        <div className="text-5xl font-bold text-white mb-4 font-playfair">
+          <AnimatedCounter end={3.2} suffix="x" />
+        </div>
+        <p className="text-gray-200 font-medium text-lg mb-2 font-poppins">ROAS</p>
+        <p className="text-gray-400 text-sm font-poppins">Retorno promedio de inversión</p>
+      </AnimatedCard>
+
+      <AnimatedCard delay={0.8} className="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20 text-center hover:bg-white/15 transition-colors duration-300">
+        <div className="text-5xl font-bold text-white mb-4 font-playfair">
+          <AnimatedCounter end={3 } suffix=" minutos" />
+        </div>
+        <p className="text-gray-200 font-medium text-lg mb-2 font-poppins">Tiempo de Respuesta</p>
+        <p className="text-gray-400 text-sm font-poppins">Promedio en atención y gestión de leads</p>
+      </AnimatedCard>
+
+      <AnimatedCard delay={0.7} className="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20 text-center hover:bg-white/15 transition-colors duration-300">
+        <div className="text-5xl font-bold text-white mb-4 font-playfair">
+          <AnimatedCounter end={89} suffix="%" />
+        </div>
+        <p className="text-gray-200 font-medium text-lg mb-2 font-poppins">Satisfacción del cliente</p>
+        <p className="text-gray-400 text-sm font-poppins">Basado en encuestas post-campaña</p>
+      </AnimatedCard>
+    </div>
+
+   <motion.div
+  className="mt-16 bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20 max-w-4xl mx-auto"
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6, delay: 0.5 }}
+>
+  {/* Título más destacado y con ícono animado */}
+  <div className="flex items-center justify-center mb-6 gap-3">
+    <motion.span
+      initial={{ rotate: -15, scale: 0.8 }}
+      whileInView={{ rotate: 0, scale: 1 }}
+      transition={{ type: "spring", stiffness: 300, damping: 10, delay: 0.3 }}
+      className="text-3xl"
+    >
+      🚀
+    </motion.span>
+    <h3 className="text-2xl font-semibold text-white font-playfair tracking-wide">
+      Impacto de las Campañas
+    </h3>
+  </div>
+
+  {/* Texto con frases clave destacadas */}
+  <p className="text-gray-200 mb-6 font-poppins text-center leading-relaxed">
+    Las campañas diseñadas y ejecutadas lograron un{" "}
+    <span className="text-purple-400 font-semibold">balance óptimo entre presupuesto e impacto</span>, consiguiendo
+    <span className="text-purple-400 font-semibold"> resultados superiores a la media del sector</span>. La combinación de{" "}
+    <span className="text-blue-300 font-semibold">diseño estacional</span>,{" "}
+    <span className="text-blue-300 font-semibold">mensajes claros</span> y{" "}
+    <span className="text-blue-300 font-semibold">segmentación precisa</span> permitió{" "}
+    <span className="text-purple-400 font-semibold">maximizar el retorno de inversión</span> publicitaria.
+  </p>
+
+  {/* Cuadro con estrategias y mejoras */}
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+    <div className="bg-white/5 p-6 rounded-lg border border-white/10">
+      <h4 className="font-medium text-white mb-4 font-playfair text-lg flex items-center">
+        <span className="w-8 h-8 bg-purple-500/30 rounded-full flex items-center justify-center mr-3">
+          <span className="text-purple-200">✓</span>
+        </span>
+        Estrategias Efectivas
+      </h4>
+      <ul className="space-y-2 text-gray-300 text-sm font-poppins">
+        <li className="flex items-start">
+          <span className="text-purple-400 mr-2">•</span>
+          Adaptación visual por temporada
+        </li>
+        <li className="flex items-start">
+          <span className="text-purple-400 mr-2">•</span>
+          Mensajes directos con llamados a la acción claros
+        </li>
+        <li className="flex items-start">
+          <span className="text-purple-400 mr-2">•</span>
+          Segmentación precisa por intereses y comportamiento
+        </li>
+        <li className="flex items-start">
+          <span className="text-purple-400 mr-2">•</span>
+          Optimización continua basada en datos
+        </li>
+      </ul>
+    </div>
+
+
+        <div className="bg-white/5 p-6 rounded-lg border border-white/10">
+          <h4 className="font-medium text-white mb-4 font-playfair text-lg flex items-center">
+            <span className="w-8 h-8 bg-blue-500/30 rounded-full flex items-center justify-center mr-3">
+              <span className="text-blue-200">↗</span>
+            </span>
+            Mejoras Implementadas
+          </h4>
+          <ul className="space-y-2 text-gray-300 text-sm font-poppins">
+            <li className="flex items-start">
+              <span className="text-blue-400 mr-2">•</span>
+              Rediseño de landing pages para mejorar conversión
+            </li>
+            <li className="flex items-start">
+              <span className="text-blue-400 mr-2">•</span>
+              Pruebas A/B de creatividades y mensajes
+            </li>
+            <li className="flex items-start">
+              <span className="text-blue-400 mr-2">•</span>
+              Ajuste de presupuestos según rendimiento
+            </li>
+            <li className="flex items-start">
+              <span className="text-blue-400 mr-2">•</span>
+              Implementación de remarketing estratégico
+            </li>
+          </ul>
+        </div>
+      </div>
+
+{/* Línea animada con íconos representativos */}  
+<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 pt-6 px-2">
+  {[
+    { icon: "🎨", label: "Creatividad" },
+    { icon: "⚙️", label: "Optimización" },
+    { icon: "📊", label: "Métricas" },
+    { icon: "💰", label: "ROI" },
+    { icon: "📱", label: "Multicanal" },
+  ].map(({ icon, label }, index) => (
+    <motion.div
+      key={label}
+      className="flex flex-col items-center justify-center h-24 bg-white/10 rounded-xl border border-white/20 shadow-sm text-white text-xl transition-transform duration-300 hover:scale-105"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: 0.1 * index }}
+    >
+      <span className="text-2xl">{icon}</span>
+      <span className="text-sm font-poppins text-white/90 mt-2 text-center">{label}</span>
+    </motion.div>
+  ))}
+</div>
+
+
+
+    </motion.div>
+  </div>
+</section>
+
+{/* Testimonios Sectiongit init
+ */}
 <section id="testimonios" className="py-16 bg-gradient-to-b from-gray-50 to-white">
   <div className="container mx-auto px-4 md:px-6">
     <motion.div

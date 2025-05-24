@@ -1,14 +1,20 @@
 import type { Config } from "tailwindcss"
 
 const config: Config = {
+  // 🌓 Activar modo oscuro con clase
+  darkMode: "class",
+
+  // 1️⃣ Dónde buscar clases Tailwind
   content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "*.{js,ts,jsx,tsx,mdx}",
   ],
+
   theme: {
     extend: {
+      // 2️⃣ Colores de tu diseño
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -44,6 +50,8 @@ const config: Config = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+
+      // 3️⃣ Radios, fuentes y patrones
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -60,6 +68,21 @@ const config: Config = {
       },
     },
   },
+
+  // 4️⃣ Clases "dinámicas" que no encuentra en scanning estático
+  safelist: [
+    "group-open:rotate-180",
+    "animate-background-xy",
+    "bg-gradient-to-r",
+    "from-purple-500",
+    "via-blue-500",
+    "to-purple-500",
+    "hover:scale-105",
+    "transition-transform",
+    "duration-500",
+  "animate-fade-in",
+  ],
+
   plugins: [],
 }
 
