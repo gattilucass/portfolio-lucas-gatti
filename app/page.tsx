@@ -4,7 +4,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Mail, Linkedin, Phone, ArrowDown, ExternalLink, Play, FileText } from "lucide-react"
 import { motion } from "framer-motion"
-import Navbar from "@/components/navbar"
 import SectionTitle from "@/components/section-title"
 import SectionDivider from "@/components/section-divider"
 import AnimatedCard from "@/components/animated-card"
@@ -48,9 +47,7 @@ export default function Home() {
 
   return (
 
-    <main className="min-h-screen bg-white overflow-hidden">
-      
-      <Navbar />
+    <main id="top" className="min-h-screen bg-white overflow-hidden scroll-smooth">
       <CVViewer />
       <ScrollToTop />
       <FloatingContact />
@@ -233,7 +230,7 @@ export default function Home() {
             🎯 Especialidad
           </h3>
           <p className="text-gray-700 font-poppins mb-4">
-            <strong>Contenido visual impactante</strong>, campañas de alto CPL y ROI, y conversiones medibles.
+            <strong>Contenido visual impactante</strong>, campañas de alto CTR, bajo CPL y buen ROI.
           </p>
           <p className="text-gray-700 font-poppins mb-4">
           <li>Diseño de campañas efectivas con estética profesional.</li>
@@ -1111,7 +1108,7 @@ export default function Home() {
       {/* NUEVAS CARDS */}
       <AnimatedCard delay={0.5} className="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20 text-center hover:bg-white/15 transition-colors duration-300">
         <div className="text-5xl font-bold text-white mb-4 font-playfair">
-          <AnimatedCounter end={7} suffix="%" />
+          <AnimatedCounter end={5} suffix="%" />
         </div>
         <p className="text-gray-200 font-medium text-lg mb-2 font-poppins">Tasa de conversión</p>
         <p className="text-gray-400 text-sm font-poppins">En campañas inbound + remarketing</p>
@@ -1122,7 +1119,7 @@ export default function Home() {
           <AnimatedCounter end={3.2} suffix="x" />
         </div>
         <p className="text-gray-200 font-medium text-lg mb-2 font-poppins">ROAS</p>
-        <p className="text-gray-400 text-sm font-poppins">Retorno promedio de inversión</p>
+        <p className="text-gray-400 text-sm font-poppins">Retorno promedio de inversión (En un tiempo estimado de 3 meses.)</p>
       </AnimatedCard>
 
       <AnimatedCard delay={0.8} className="bg-white/10 backdrop-blur-sm p-8 rounded-lg border border-white/20 text-center hover:bg-white/15 transition-colors duration-300">
@@ -1262,8 +1259,7 @@ export default function Home() {
   </div>
 </section>
 
-{/* Testimonios Sectiongit init
- */}
+{/* Testimonios Section */}
 <section id="testimonios" className="py-16 bg-gradient-to-b from-gray-50 to-white">
   <div className="container mx-auto px-4 md:px-6">
     <motion.div
@@ -1295,95 +1291,105 @@ export default function Home() {
       modules={[Autoplay, Navigation]}
     >
       {[
-  {
-    nombre: "Maximiliano",
-    cargo: "CEO de Segurline",
-    texto: "Hicimos campañas de publicidad en redes sociales y Google Ads. Lucas se encargó de todo el diseño y la estrategia. Los resultados fueron excelentes.",
-    whatsapp: "5491169799220",
-    avatar: "/images/avatar-maxi.png",
-    emoji: "💼"
-  },
-  {
-    nombre: "Verónica",
-    cargo: "Salón de Belleza",
-    texto: "Un genio, Lucas! Me ayudó a crear la página de Instagram y a hacer los diseños para las promociones. Tambien, se encargó de la publicidad en redes sociales. Estoy muy contenta con el resultado.",
-    whatsapp: "5491122512637",
-    avatar: "/images/avatar-vero.png",
-    emoji: "💅"
-  },
-  {
-    nombre: "Giselle",
-    cargo: "Estética Arum",
-    texto: "Muy prolijo. Me hizo los posteos, flyers, y hasta un video para TikTok. Me encantó el resultado! Siempre con buena onda y buena predisposición.",
-    whatsapp: "5491149460114",
-    avatar: "/images/avatar-gise.png",
-    emoji: "🌸"
-  },
-  {
-    nombre: "Pablo",
-    cargo: "Ex compañero - Segurline",
-    texto: "Lucas siempre está predispuesto a ayudar y a dar una mano. Un gran compañero y amigo. Lo recomiendo al 100% 👌",
-    whatsapp: "5491136397426",
-    avatar: "/images/avatar-pablo.png",
-    emoji: "🤝"
-  },
-  {
-    nombre: "Ezequiel",
-    cargo: "Ex compañero - Segurline",
-    texto: "Siempre con buena onda y mucha paciencia. Me enseñó a usar Canva y a hacer videos. Un genio! 🙌",
-    whatsapp: "5491123950996",
-    avatar: "/images/avatar-toni.png",
-    emoji: "🙌"
-  }
-].map((t, i) => (
+        {
+          nombre: "Maximiliano",
+          cargo: "CEO de Segurline",
+          texto: "Hicimos campañas de publicidad en redes sociales y Google Ads. Lucas se encargó de todo el diseño y la estrategia. Los resultados fueron excelentes.",
+          whatsapp: "5491169799220",
+          avatar: "/images/avatar-maxi.png",
+          emoji: "💼"
+        },
+        {
+          nombre: "Verónica",
+          cargo: "Salón de Belleza",
+          texto: "Un genio, Lucas! Me ayudó a crear la página de Instagram y a hacer los diseños para las promociones. Tambien, se encargó de la publicidad en redes sociales. Estoy muy contenta con el resultado.",
+          whatsapp: "5491122512637",
+          avatar: "/images/avatar-vero.png",
+          emoji: "💅"
+        },
+        {
+          nombre: "Giselle",
+          cargo: "Estética Arum",
+          texto: "Muy prolijo. Me hizo los posteos, flyers, y hasta un video para TikTok. Me encantó el resultado! Siempre con buena onda y buena predisposición.",
+          whatsapp: "5491149460114",
+          avatar: "/images/avatar-gise.png",
+          emoji: "🌸"
+        },
+        {
+          nombre: "Pablo",
+          cargo: "Ex compañero - Segurline",
+          texto: "Lucas siempre está predispuesto a ayudar y a dar una mano. Un gran compañero y amigo. Lo recomiendo al 100% 👌",
+          whatsapp: "5491136397426",
+          avatar: "/images/avatar-pablo.png",
+          emoji: "🤝"
+        },
+        {
+          nombre: "Ezequiel",
+          cargo: "Ex compañero - Segurline",
+          texto: "Siempre con buena onda y mucha paciencia. Me enseñó a usar Canva y a hacer videos. Un genio! 🙌",
+          whatsapp: "5491123950996",
+          avatar: "/images/avatar-toni.png",
+          emoji: "🙌"
+        }
+      ].map((t, i) => (
+        <SwiperSlide key={i}>
+          <motion.div
+            className="h-full bg-white/60 backdrop-blur-lg rounded-xl shadow-lg border border-gray-100 p-6 flex flex-col justify-between"
+            whileHover={{ y: -5 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <div className="flex items-center gap-4 mb-3">
+              <Image
+                src={t.avatar}
+                alt={t.nombre}
+                width={48}
+                height={48}
+                className="rounded-full object-cover border-2 border-purple-300 shadow-sm"
+              />
+              <div className="flex items-center gap-1">
+                {Array.from({ length: 5 }).map((_, j) => (
+                  <motion.div
+                    key={j}
+                    animate={{ y: [0, -2, 0], scale: [1, 1.15, 1] }}
+                    transition={{
+                      duration: 1.2,
+                      delay: j * 0.1,
+                      repeat: Infinity,
+                      repeatDelay: 4,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <Star size={18} className="fill-yellow-400 text-yellow-400 drop-shadow-[0_0_4px_#facc15]" />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
 
-  <SwiperSlide key={i}>
-    <motion.div
-      className="h-full bg-white/60 backdrop-blur-lg rounded-xl shadow-lg border border-gray-100 p-6 flex flex-col justify-between"
-      whileHover={{ y: -5 }}
-      whileTap={{ scale: 0.98 }}
-    >
-      <div className="flex items-center gap-4 mb-3">
-        <Image
-          src={t.avatar}
-          alt={t.nombre}
-          width={48}
-          height={48}
-          className="rounded-full object-cover border-2 border-purple-300 shadow-sm"
-        />
-        <div className="flex items-center gap-1">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Star key={i} size={16} className="text-yellow-400" />
-          ))}
-        </div>
-      </div>
+            <div className="mb-3">
+              <div className="font-semibold text-gray-900 text-sm">{t.nombre}</div>
+              <div className="text-xs text-gray-600">{t.cargo}</div>
+            </div>
 
-      <div className="mb-3">
-        <div className="font-semibold text-gray-900 text-sm">{t.nombre}</div>
-        <div className="text-xs text-gray-600">{t.cargo}</div>
-      </div>
+            <p className="text-gray-800 text-[15px] leading-relaxed font-poppins mb-4 min-h-[80px]">
+              <span className="text-lg mr-1">{t.emoji}</span>
+              {t.texto}
+            </p>
 
-      <p className="text-gray-800 text-[15px] leading-relaxed font-poppins mb-4 min-h-[80px]">
-        <span className="text-lg mr-1">{t.emoji}</span>
-        {t.texto}
-      </p>
-
-      <a
-        href={`https://api.whatsapp.com/send?phone=${t.whatsapp}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-2 inline-block px-3 py-1.5 bg-green-100 text-green-800 text-xs rounded-full font-medium hover:bg-green-500 hover:text-white transition-all text-center"
-      >
-        Contactar por WhatsApp
-      </a>
-    </motion.div>
-  </SwiperSlide>
-))}
-
-    
+            <a
+              href={`https://api.whatsapp.com/send?phone=${t.whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-block px-3 py-1.5 bg-green-100 text-green-800 text-xs rounded-full font-medium hover:bg-green-500 hover:text-white transition-all text-center"
+            >
+              Contactar por WhatsApp
+            </a>
+          </motion.div>
+        </SwiperSlide>
+      ))}
     </Swiper>
   </div>
 </section>
+
 
 
 

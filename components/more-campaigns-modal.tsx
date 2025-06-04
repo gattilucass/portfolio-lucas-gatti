@@ -30,7 +30,7 @@ export default function MoreCampaignsModal() {
       src: "/images/verano-seguro.jpg",
       link: "https://www.canva.com/design/DAF6UILhiH8/_SVw_8O5vvDRmTyRf3O_fw/edit?utm_content=DAF6UILhiH8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton",
       stats: {
-        views: "38.500+",
+        views: "40.500+",
         engagement: "7.8%",
         conversion: "4.2%",
       },
@@ -42,7 +42,7 @@ export default function MoreCampaignsModal() {
       src: "/images/carrusel-foto.jpg",
       link: "https://www.canva.com/design/DAF3v-WTdXY/tbewIwhGd7jdOTAVW2BJew/edit",
       stats: {  
-        views: "45.000+",
+        views: "25.000+",
         engagement: "8.2%",
         conversion: "3.5%",
       },
@@ -56,7 +56,7 @@ export default function MoreCampaignsModal() {
       stats: {
         views: "32.000+",
         engagement: "7.5%",
-        conversion: "4.2%",
+        conversion: "3.8%",
       },
     },
     {
@@ -66,9 +66,9 @@ export default function MoreCampaignsModal() {
       src: "/images/promo-estetica.png",
       link: "https://drive.google.com/file/d/1PVYnD0g2tGlIvUgYwdH8abOAs8Ab8kIE/view",
       stats: {
-        views: "18.500+",
+        views: "10.000+",
         engagement: "9.3%",
-        conversion: "5.1%",
+        conversion: "2.8%",
       },
     },
     {
@@ -80,7 +80,7 @@ export default function MoreCampaignsModal() {
       stats: {
         views: "28.700+",
         engagement: "6.8%",
-        conversion: "4.0%",
+        conversion: "2.1%",
       },
     },
     {
@@ -90,9 +90,9 @@ export default function MoreCampaignsModal() {
       src: "/images/promo-nafta.jpg",
       link: "https://drive.google.com/file/d/1nrcS4Ue8iOJcHwJzlo5XT5C9f2zVzMJs/view",
       stats: {
-        views: "52.300+",
+        views: "41.300+",
         engagement: "8.7%",
-        conversion: "4.8%",
+        conversion: "2.3%",
       },
     },
 {
@@ -103,8 +103,8 @@ export default function MoreCampaignsModal() {
       link: "https://drive.google.com/file/d/18aTqfZhM5ZH7z_l9x3Ins-UDvHiwQ62T/view?usp=sharing",
       stats: {
         views: "15.000+",
-        engagement: "4.2%",
-        conversion: "3.9%",
+        engagement: "6.1%",
+        conversion: "1.2%",
       },
     },
   ]

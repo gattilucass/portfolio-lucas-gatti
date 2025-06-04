@@ -5,7 +5,7 @@ import { Montserrat, Poppins, Playfair_Display } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import SettingsButton from "@/components/settings-button"
-
+import Navbar from "@/components/navbar"
 
 // 1️⃣ Definición de fuentes
 const montserrat = Montserrat({
@@ -44,9 +44,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           {children}
-    
+      <Navbar />
         </ThemeProvider>
       </body>
     </html>
   )
 }
+
+
