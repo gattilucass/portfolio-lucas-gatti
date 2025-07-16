@@ -922,6 +922,147 @@ export default function Home() {
             Trabajos Freelance
           </SectionTitle>
 
+      {/* Volkswagen ID.4 - IA Generativa */}
+<div className="mt-20">
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6 }}
+    className="bg-gradient-to-r from-purple-50 to-blue-50 p-8 rounded-xl mb-10 shadow-sm"
+  >
+    <h3 className="text-2xl md:text-3xl font-semibold font-playfair text-gray-900 mb-4 text-center">
+      Web Interactiva con IA Generativa – Volkswagen ID.4
+    </h3>
+    <div className="h-1 w-32 mx-auto bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mb-4"></div>
+    <p className="text-gray-600 max-w-3xl mx-auto font-poppins text-center">
+      Sitio web conceptual diseñado y desarrollado por mí, integrando inteligencia artificial generativa para contenido visual, storytelling y experiencia transmedia.
+    </p>
+  </motion.div>
+
+  <div className="flex flex-col lg:flex-row gap-8 items-start">
+    {/* Imagen representativa */}
+    <motion.div
+      className="w-full lg:w-2/3"
+      initial={{ opacity: 0, x: -30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: 0.2 }}
+    >
+      <div className="relative w-full aspect-video overflow-hidden rounded-xl shadow-xl group">
+        <Image
+          src="/images/volkswagen-cover.jpg"
+          alt="Volkswagen ID.4 Web"
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+          <a
+            href="https://volkswagen-project.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-white/90 text-gray-900 rounded-full p-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
+          >
+            <ExternalLink size={24} />
+          </a>
+        </div>
+      </div>
+    </motion.div>
+
+    {/* Detalles técnicos */}
+<motion.div
+  className="lg:w-1/3 flex flex-col justify-center"
+  initial={{ opacity: 0, x: 30 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6, delay: 0.4 }}
+>
+  <div className="bg-gray-50 p-8 rounded-lg shadow-sm border-l-4 border-purple-500 h-full flex flex-col justify-between">
+    <div>
+      <h4 className="font-semibold text-gray-900 mb-6 font-playfair text-xl">Detalles del Proyecto</h4>
+      <ul className="space-y-4 text-gray-700 font-poppins text-sm leading-relaxed">
+        <li className="flex items-start">
+          <span className="text-purple-500 mr-2">•</span>
+          <span><strong>Framework:</strong> Next.js + Tailwind CSS</span>
+        </li>
+        <li className="flex items-start">
+          <span className="text-purple-500 mr-2">•</span>
+          <span><strong>Hosting:</strong> Deploy en Vercel</span>
+        </li>
+        <li className="flex items-start">
+          <span className="text-purple-500 mr-2">•</span>
+          <span><strong>IA Generativa:</strong> ChatGPT, Gemini, VEO 3, ElevenLabs</span>
+        </li>
+        <li className="flex items-start">
+          <span className="text-purple-500 mr-2">•</span>
+          <span><strong>Contenido:</strong> Key visuals, spot audiovisual, prompts explicativos</span>
+        </li>
+        <li className="flex items-start">
+          <span className="text-purple-500 mr-2">•</span>
+          <span><strong>Objetivo:</strong> Mostrar cómo la IA puede potenciar la creatividad y el diseño web</span>
+        </li>
+      </ul>
+    </div>
+
+    {/* Iconos de herramientas - corregido con SVGs */}
+    <div className="mt-8 flex flex-wrap gap-4 text-xs text-gray-500 font-medium">
+      <div className="flex items-center gap-2">
+        <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <path d="M12 2l9 4.9v10.2l-9 4.9-9-4.9V6.9L12 2z" />
+        </svg>
+        Vercel
+      </div>
+      <div className="flex items-center gap-2">
+        <svg className="w-4 h-4 text-violet-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M8 12h8M12 8v8" />
+        </svg>
+        VEO 3
+      </div>
+      <div className="flex items-center gap-2">
+        <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <path d="M16 18v-6a4 4 0 0 0-8 0v6" />
+          <rect x="4" y="18" width="16" height="2" rx="1" />
+        </svg>
+        ChatGPT
+      </div>
+      <div className="flex items-center gap-2">
+        <svg className="w-4 h-4 text-yellow-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <polygon points="12 2 15 11 24 11 17 17 20 26 12 20 4 26 7 17 0 11 9 11 12 2" />
+        </svg>
+        Gemini
+      </div>
+      <div className="flex items-center gap-2">
+        <svg className="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <circle cx="12" cy="7" r="4" />
+          <path d="M5.5 21a7.5 7.5 0 0 1 13 0" />
+        </svg>
+        Lucas Gatti
+      </div>
+    </div>
+
+    <a
+      href="https://volkswagen-project.vercel.app/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="mt-6 inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors group"
+    >
+      Visitar Proyecto{" "}
+      <span className="ml-1 transform group-hover:translate-x-1 transition-transform">
+        <ArrowRight size={16} />
+      </span>
+    </a>
+  </div>
+</motion.div>
+
+  </div>
+
+  {/* Separador visual para cortar con los demás proyectos */}
+  <div className="mt-16 mb-12 border-t border-gray-200" />
+</div>
+
+
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Freelance Project 1 */}
             <AnimatedCard delay={0.1} className="group">
