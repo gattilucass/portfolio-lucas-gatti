@@ -24,12 +24,12 @@ export default function ClientModal({
       onRequestClose={onRequestClose}
       shouldCloseOnOverlayClick={true}
       overlayClassName="fixed inset-0 bg-black/50 z-50 flex items-center justify-center"
-      className="relative z-50 bg-white rounded-lg p-6 max-w-xl mx-auto outline-none"
+      className="relative z-50 bg-white dark:bg-slate-800 rounded-lg p-6 max-w-xl mx-auto outline-none"
     >
       {/* Botón de cierre */}
       <button
         onClick={onRequestClose}
-        className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
+        className="absolute top-3 right-3 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white"
         aria-label="Cerrar"
       >
         ✕

@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion"
 export default function FloatingContact() {
   const [isOpen, setIsOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
+  const [footerVisible, setFooterVisible] = useState(false)
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -21,10 +22,34 @@ export default function FloatingContact() {
     return () => window.removeEventListener("scroll", toggleVisibility)
   }, [])
 
+  // Hide when footer is in viewport
+  useEffect(() => {
+    const footer = document.getElementById("site-footer")
+    if (!footer) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setFooterVisible(entry.isIntersecting)
+      },
+      { threshold: 0.1 }
+    )
+
+    observer.observe(footer)
+    return () => observer.disconnect()
+  }, [])
+
+  const show = isVisible && !footerVisible
+
   return (
     <AnimatePresence>
-      {isVisible && (
-        <div className="fixed left-6 bottom-6 z-50">
+      {show && (
+        <motion.div
+          className="fixed left-6 bottom-6 z-50"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.25 }}
+        >
           <AnimatePresence>
             {isOpen && (
               <motion.div
@@ -60,21 +85,18 @@ export default function FloatingContact() {
           </AnimatePresence>
 
           <motion.button
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsOpen(!isOpen)}
             className={`p-4 rounded-full shadow-lg flex items-center justify-center transition-colors ${
               isOpen
-                ? "bg-gray-700 text-white hover:bg-gray-800"
-                : "bg-gradient-to-r from-purple-600 to-blue-600 text-white"
+                ? "bg-gray-700 dark:bg-slate-700 text-white hover:bg-gray-800 dark:hover:bg-slate-600"
+                : "bg-gradient-to-r from-purple-600 to-blue-600 text-white dark:from-purple-500 dark:to-blue-500"
             }`}
           >
             {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
           </motion.button>
-        </div>
+        </motion.div>
       )}
     </AnimatePresence>
   )

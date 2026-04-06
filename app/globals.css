@@ -6,9 +6,32 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ─── Gradiente unificado dark mode ───────────────────────────────────────────
+   Se aplica sobre html.dark con background-attachment: fixed para que
+   al scrollear el gradiente permanezca estático — sensación de página única.
+   La textura es el mismo patrón del Hero pero a opacidad 0.015 (prácticamente
+   invisible, solo da profundidad leve al fondo).
+──────────────────────────────────────────────────────────────────────────────── */
+html.dark {
+  background:
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat,
+    linear-gradient(160deg,
+      hsl(232, 50%, 7%) 0%,
+      hsl(265, 45%, 8%) 35%,
+      hsl(238, 48%, 6%) 60%,
+      hsl(265, 45%, 8%) 85%,
+      hsl(232, 50%, 7%) 100%
+    );
+  background-attachment: fixed, fixed;
+}
+
+/* En dark mode, el body es transparente → se ve el gradiente del html */
+.dark body {
+  background: transparent !important;
+}
+
 body {
-  color: #333;
-  background: white;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @layer base {
@@ -45,57 +68,120 @@ body {
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Fondo principal: slate-950 con toque azulado, NO negro puro */
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    /* Cards: ligeramente más claras que el fondo */
+    --card: 220 40% 9%;
+    --card-foreground: 210 40% 96%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 220 40% 9%;
+    --popover-foreground: 210 40% 96%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    /* Primary invertido para dark */
+    --primary: 210 40% 96%;
+    --primary-foreground: 222 47% 11%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 217 33% 14%;
+    --secondary-foreground: 210 40% 96%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 217 33% 14%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 217 33% 14%;
+    --accent-foreground: 210 40% 96%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 96%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 217 33% 18%;
+    --input: 217 33% 18%;
+    --ring: 213 27% 84%;
   }
 }
 
 @import 'swiper/css';
 
-.swiper-button-next,
-.swiper-button-prev {
-  color: #7c3aed; /* púrpura */
-  scale: 0.5;
-  opacity: 0.2;
-  transition: all 0.3s ease;
+/* Testimonials swiper */
+.testimonials-swiper {
+  overflow: hidden !important;
+  padding: 4px 0;
 }
 
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-  opacity: 1;
-  transform: scale(1);
+/* Arrows: custom nav buttons positioned by the wrapper, NOT the swiper */
+.testimonials-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.95);
+  color: #7c3aed;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.testimonials-nav-btn:hover {
+  background: #7c3aed;
+  color: white;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
+  border-color: transparent;
+}
+
+.testimonials-nav-prev {
+  left: 0;
+}
+
+.testimonials-nav-next {
+  right: 0;
+}
+
+:is(.dark) .testimonials-nav-btn {
+  background: rgba(51, 65, 85, 0.95);
+  color: #a78bfa;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+:is(.dark) .testimonials-nav-btn:hover {
+  background: #7c3aed;
+  color: white;
+  border-color: transparent;
+}
+
+/* Hide default swiper arrows since we use custom ones */
+.testimonials-swiper .swiper-button-next,
+.testimonials-swiper .swiper-button-prev {
+  display: none !important;
+}
+
+@media (max-width: 640px) {
+  .testimonials-nav-btn {
+    display: none;
+  }
 }
 
 @keyframes background-xy {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
+
 .animate-background-xy {
   animation: background-xy 5s ease infinite;
 }
@@ -104,11 +190,13 @@ body {
   .animate-fade-in {
     animation: fade-in 0.3s ease-out forwards;
   }
+
   @keyframes fade-in {
     from {
       opacity: 0;
       transform: translateY(-10px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -121,6 +209,7 @@ body {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -144,9 +233,11 @@ body {
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-20px);
   }
+
   100% {
     transform: translateY(0px);
   }
@@ -155,9 +246,15 @@ body {
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
+
 @keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-100%); }
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 .animate-marquee {
@@ -173,6 +270,7 @@ body {
     opacity: 0;
     transform: translateY(20px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -277,7 +375,7 @@ body {
   transform: translateY(0);
 }
 
-.hover-fill-effect > * {
+.hover-fill-effect>* {
   position: relative;
   z-index: 1;
 }
@@ -311,9 +409,11 @@ body {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -347,19 +447,14 @@ body {
   gap: 1.25rem;
 }
 
-/* Mejoras de contraste */
-.text-gray-600 {
-  color: rgba(75, 85, 99, 1);
+/* Transición suave para todos los elementos al cambiar de tema */
+*, *::before, *::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.15s ease, box-shadow 0.3s ease;
 }
 
-.text-gray-700 {
-  color: rgba(55, 65, 81, 1);
-}
-
-.bg-white {
-  background-color: #ffffff;
-}
-
-.shadow-md {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+/* Ocultar navbar cuando el modal de proyectos está abierto */
+body[data-modal-open="true"] nav {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
 }

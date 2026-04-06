@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import ThemeToggle from "@/components/theme-toggle"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -47,7 +48,6 @@ export default function Navbar() {
     { name: "Habilidades", href: "#skills" },
     { name: "Proyectos", href: "#portfolio" },
     { name: "Campañas", href: "#campaigns" },
-    { name: "Freelance", href: "#freelance" },
     { name: "Resultados", href: "#results" },
     { name: "Testimonios", href: "#testimonios" },
     { name: "Contacto", href: "#contact" },
@@ -60,14 +60,18 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
         className={`fixed top-0 left-0 right-0 z-[999] backdrop-blur-md transition-all duration-300 ${
-    scrolled ? "bg-white/90 shadow-md py-3" : "bg-transparent py-5"
-  }`}
+          scrolled
+            ? "bg-white/90 dark:bg-slate-900/90 shadow-md dark:shadow-slate-900/50 py-3"
+            : "bg-transparent py-5"
+        }`}
       >
         <div className="flex items-center justify-between w-full px-4 md:px-6">
           <Link
             href="/"
             className={`text-xl font-bold font-playfair pl-1 sm:pl-2 md:pl-4 ${
-              scrolled ? "text-gray-900" : "text-white"
+              scrolled
+                ? "text-gray-900 dark:text-white"
+                : "text-white"
             }`}
           >
             <motion.div whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 400, damping: 10 }}>
@@ -85,7 +89,9 @@ export default function Navbar() {
                 <Link
                   href={item.href}
                   className={`${
-                    scrolled ? "text-gray-700 hover:text-gray-900" : "text-gray-100 hover:text-white"
+                    scrolled
+                      ? "text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                      : "text-gray-100 hover:text-white"
                   } transition-colors font-medium relative group`}
                 >
                   {item.name}
@@ -95,19 +101,22 @@ export default function Navbar() {
             ))}
           </nav>
 
-          <motion.button
-            id="menu-toggle"
-            className="md:hidden ml-2 z-[999]"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-            whileTap={{ scale: 0.9 }}
-          >
-            {isOpen ? (
-              <X className={scrolled ? "text-gray-900" : "text-white"} size={24} />
-            ) : (
-              <Menu className={scrolled ? "text-gray-900" : "text-white"} size={24} />
-            )}
-          </motion.button>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <motion.button
+              id="menu-toggle"
+              className="md:hidden ml-1 z-[999]"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle menu"
+              whileTap={{ scale: 0.9 }}
+            >
+              {isOpen ? (
+                <X className={scrolled ? "text-gray-900 dark:text-white" : "text-white"} size={24} />
+              ) : (
+                <Menu className={scrolled ? "text-gray-900 dark:text-white" : "text-white"} size={24} />
+              )}
+            </motion.button>
+          </div>
         </div>
       </motion.header>
 
@@ -126,7 +135,7 @@ export default function Navbar() {
             {/* Contenedor menú móvil */}
             <motion.div
               id="mobile-menu"
-              className="fixed inset-0 z-[100] flex flex-col justify-center items-center bg-white dark:bg-gray-900 px-6 space-y-6"
+              className="fixed inset-0 z-[100] flex flex-col justify-center items-center bg-white dark:bg-slate-900 px-6 space-y-6"
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -30 }}
@@ -137,7 +146,7 @@ export default function Navbar() {
                   key={item.name}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className="text-gray-800 dark:text-white font-semibold text-xl hover:text-purple-600 transition-colors"
+                  className="text-gray-800 dark:text-gray-100 font-semibold text-xl hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
                   whileHover={{ scale: 1.05 }}
                   transition={{ delay: index * 0.03 }}
                 >

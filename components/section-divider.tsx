@@ -36,8 +36,8 @@ export default function SectionDivider({ light = false }: SectionDividerProps) {
         className={`relative w-14 h-14 flex items-center justify-center rounded-full ${
           light
             ? "bg-gray-800 hover:bg-gray-700"
-            : "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
-        } shadow-md cursor-pointer transition-colors duration-300`}
+            : "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 dark:from-purple-500 dark:to-blue-500 dark:hover:from-purple-600 dark:hover:to-blue-600"
+        } shadow-md dark:shadow-slate-900/50 cursor-pointer transition-colors duration-300`}
         whileHover={{ y: 5 }}
         animate={{
           y: [0, -5, 0],

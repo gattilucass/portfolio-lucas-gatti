@@ -8,52 +8,60 @@ interface AnimatedCounterProps {
   duration?: number
   prefix?: string
   suffix?: string
+  decimals?: number
 }
 
-export default function AnimatedCounter({ end, duration = 2000, prefix = "", suffix = "" }: AnimatedCounterProps) {
-  const [count, setCount] = useState(0)
-  const ref = useRef(null)
+// Ease-out cubic for smooth deceleration
+function easeOutCubic(t: number): number {
+  return 1 - Math.pow(1 - t, 3)
+}
+
+export default function AnimatedCounter({
+  end,
+  duration = 2200,
+  prefix = "",
+  suffix = "",
+  decimals = 0,
+}: AnimatedCounterProps) {
+  const [display, setDisplay] = useState(`${prefix}0${suffix}`)
+  const ref = useRef<HTMLSpanElement>(null)
   const isInView = useInView(ref, { once: true, amount: 0.5 })
-  const [hasAnimated, setHasAnimated] = useState(false)
+  const hasAnimated = useRef(false)
 
   useEffect(() => {
-    if (isInView && !hasAnimated) {
-      let startTime: number
-      let animationFrame: number
+    if (isInView && !hasAnimated.current) {
+      hasAnimated.current = true
+      let startTime: number | null = null
+      let raf: number
 
-      const startAnimation = (timestamp: number) => {
-        startTime = timestamp
-        animate(timestamp)
-      }
+      const tick = (now: number) => {
+        if (!startTime) startTime = now
+        const elapsed = now - startTime
+        const linear = Math.min(elapsed / duration, 1)
+        const eased = easeOutCubic(linear)
+        const current = eased * end
 
-      const animate = (timestamp: number) => {
-        const progress = Math.min((timestamp - startTime) / duration, 1)
-        const currentCount = Math.floor(progress * end)
-        setCount(currentCount)
+        setDisplay(
+          `${prefix}${decimals > 0 ? current.toFixed(decimals) : Math.round(current).toLocaleString()}${suffix}`
+        )
 
-        if (progress < 1) {
-          animationFrame = requestAnimationFrame(animate)
+        if (linear < 1) {
+          raf = requestAnimationFrame(tick)
         } else {
-          setCount(end)
-          setHasAnimated(true)
+          setDisplay(
+            `${prefix}${decimals > 0 ? end.toFixed(decimals) : end.toLocaleString()}${suffix}`
+          )
         }
       }
 
-      animationFrame = requestAnimationFrame(startAnimation)
-
-      return () => {
-        if (animationFrame) {
-          cancelAnimationFrame(animationFrame)
-        }
-      }
+      raf = requestAnimationFrame(tick)
+      return () => cancelAnimationFrame(raf)
     }
-  }, [isInView, end, duration, hasAnimated])
+  }, [isInView, end, duration, prefix, suffix, decimals])
 
   return (
-    <span ref={ref} className="inline-block">
-      {prefix}
-      {count.toLocaleString()}
-      {suffix}
+    <span ref={ref} className="inline-block tabular-nums">
+      {display}
     </span>
   )
 }
